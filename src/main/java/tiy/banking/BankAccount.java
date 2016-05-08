@@ -6,9 +6,17 @@ package tiy.banking;
 public class BankAccount {
     private String accountID;
     private double accountBalance;
+    public final static String DEFAULT_ACCOUNT_ID = "Default";
 
     public BankAccount() {
         System.out.println("BankAccount()");
+        this.accountID = DEFAULT_ACCOUNT_ID;
+        this.accountBalance = 0.0;
+    }
+
+    public BankAccount(String accountID, double initialBalance) {
+        this.accountID = accountID;
+        this.accountBalance = initialBalance;
     }
 
     public void deposit(double amount) {
