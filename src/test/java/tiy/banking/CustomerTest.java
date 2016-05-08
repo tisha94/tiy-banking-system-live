@@ -11,6 +11,9 @@ import static org.junit.Assert.*;
  */
 public class CustomerTest {
 
+    public static final double AMOUNT_FOR_FIRST_ACCOUNT = 100.00;
+    public static final double AMOUNT_FOR_SECOND_ACCOUNT = 300.00;
+
     @Before
     public void setUp() throws Exception {
 
@@ -65,18 +68,29 @@ public class CustomerTest {
 
     @Test
     public void testTotalAccountBalance() throws Exception {
-        Customer testCustomer = new Customer("Test", "Tester", "tester@tsl.com");
-        double amount1 = 100.00;
-        double amount2 = 300.00;
-        BankAccount testAccount1 = new BankAccount("Test Account 1", amount1);
-        BankAccount testAccount2 = new BankAccount("Test Account 2", amount2);
+        Customer testCustomer = createCustomerWithTwoBankAccounts("Test", "Tester", "tester@tsl.com");
+
+        double expectedTotal = AMOUNT_FOR_FIRST_ACCOUNT + AMOUNT_FOR_SECOND_ACCOUNT;
+
+        assertEquals(expectedTotal, testCustomer.getTotalAccountBalance(), 0.0);
+    }
+
+    /**
+     * Utility method that returns a Customer with two bank accounts
+     * Note: this uses AMOUNT_FOR_FIRST_ACCOUNT and AMOUNT_FOR_SECOND_ACCOUNT
+     * as the amounts to deposit on the first and second account, respectively
+     *
+     * @return
+     */
+    public static Customer createCustomerWithTwoBankAccounts(String firstName, String lastName, String emailAddress) {
+        Customer testCustomer = new Customer(firstName, lastName, emailAddress);
+        BankAccount testAccount1 = new BankAccount("Test Account 1", AMOUNT_FOR_FIRST_ACCOUNT);
+        BankAccount testAccount2 = new BankAccount("Test Account 2", AMOUNT_FOR_SECOND_ACCOUNT);
 
         testCustomer.addBankAccount(testAccount1);
         testCustomer.addBankAccount(testAccount2);
 
-        double expectedTotal = amount1 + amount2;
-
-        assertEquals(expectedTotal, testCustomer.getTotalAccountBalance(), 0.0);
+        return testCustomer;
     }
 
     @Test
