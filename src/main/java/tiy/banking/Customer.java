@@ -6,24 +6,36 @@ import java.util.HashMap;
  * Created by localdom on 5/6/2016.
  */
 public class Customer extends Person {
-    private HashMap<String, BankAccount> bankAccounts;
+    private HashMap<String, BankAccount> bankAccounts = new HashMap<String, BankAccount>();
 
     public Customer() {
+        super();
         System.out.println("Customer()");
     }
 
-    public void addBankAccount() {
-        System.out.println("addBankAccount()");
+    public Customer(String firstName, String lastName, String emailAddress) {
+        super(firstName, lastName, emailAddress);
+        System.out.println("Customer(firstName, lastName, emailAddress)");
     }
 
-    public long getTotalAccountBalance() {
+    public void addBankAccount(BankAccount bankAccount) {
+        System.out.println("addBankAccount()");
+        bankAccounts.put(bankAccount.getAccountID(), bankAccount);
+    }
+
+    public double getTotalAccountBalance() {
         System.out.println("getTotalAccountBalance()");
-        return -1;
+        double totalBalance = 0.0;
+        for (BankAccount currentAccount : bankAccounts.values()) {
+            totalBalance += currentAccount.getAccountBalance();
+        }
+
+        return totalBalance;
     }
 
     public BankAccount getBankAccountByID(String accountID) {
         System.out.println("getAccountByID()");
-        return null;
+        return bankAccounts.get(accountID);
     }
 
     public HashMap<String, BankAccount> getBankAccounts() {
