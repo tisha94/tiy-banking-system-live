@@ -5,6 +5,10 @@
 <h1>Hello, {{.}}!</h1>
 {{/name}}
 
+<p>
+    <a href="/accountList?customerEmailAddress={{customer.emailAddress}}&bankID={{bank.bankID}}">Back to account list for {{customer.firstName}} {{customer.lastName}}</a>
+</p>
+
 <h2>Welcome to the account details page</h2>
 
 <h3>{{bankAccount.accountID}} has a balance of ${{bankAccount.accountBalance}}</h3>

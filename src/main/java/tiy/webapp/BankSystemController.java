@@ -53,6 +53,8 @@ public class BankSystemController {
         Customer customer = bank.getBankCustomers().get(customerEmailAddress);
         BankAccount bankAccount = customer.getBankAccountByID(accountID);
         model.addAttribute("bankAccount", bankAccount);
+        model.addAttribute("customer", customer);
+        model.addAttribute("bank", bank);
         return "accountDetails";
     }
 
