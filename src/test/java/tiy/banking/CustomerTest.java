@@ -48,7 +48,7 @@ public class CustomerTest {
         double depositAmount = 100.00;
         // I know I can create a bank account with no issues because of the
         // BankAccountTest unit test class
-        BankAccount testBankAccount = new BankAccount(accountID, 100.00);
+        BankAccount testBankAccount = new BankAccount(accountID, depositAmount);
 
         testCustomer.addBankAccount(testBankAccount);
 
