@@ -1,18 +1,33 @@
+html {
+  background-image: url(http://wallpaper.zone/thumb/1240557.jpg);
+}
+
+body {
+  margin: 0;
+}
+
 .welcomebanner {
+  background-color: lightgrey;
+  border-top: 3px solid black;
   border-bottom: 3px solid black;
 }
 
 .navmenu ul {
   list-style-type: none;
   text-align: center;
+  margin-top: 5px;
   padding: 5px;
 }
 
 .navoptions li {
   display: inline;
-  border: 3px double black;
+  border: 3px outset grey;
   padding-left: 5px;
   padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 2px;
+
+  background-color: lightgrey;
 }
 
 .navoptions li a {
@@ -22,16 +37,20 @@
 
 .welcomebanner h1 {
   text-align: center;
-  color: red;
+  color: darkred;
+  margin: 0;
+  margin-top: 10px;
 }
 
 .contentBlock {
+  max-width: 60%;
   margin-left: 30%;
   margin-right: 30%;
   width: 500px;
-  border: 1px solid black;
+  border: 6px ridge grey;
   margin-top: 5px;
   margin-bottom: 10px;
+  background-color: lightgrey;
 }
 
 .contentBlock h2 {
@@ -69,10 +88,10 @@
 .loginview {
   border: 3px double black;
   background-color: lightgrey;
-  max-width: 50%;
+  max-width: 60%;
   height: 100px;
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 
 .loginview h2 {
