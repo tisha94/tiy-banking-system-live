@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import tiy.banking.Bank;
+import tiy.banking.BankAccount;
 import tiy.banking.Customer;
 
 import javax.servlet.http.HttpSession;
@@ -34,13 +35,25 @@ public class BankSystemController {
     }
 
     @RequestMapping(path = "/accountList", method = RequestMethod.GET)
-    public String getAccountList(HttpSession session, Model model, String bankID, String customerID) {
+    public String getAccountList(HttpSession session, Model model, String bankID, String customerEmailAddress) {
         setCommonAttributes(session, model);
         Bank bank = Bank.retrieve(bankID);
-        Customer customer = bank.getBankCustomers().get(customerID);
+        Customer customer = bank.getBankCustomers().get(customerEmailAddress);
         model.addAttribute("bank", bank);
         model.addAttribute("accountList", customer.getBankAccounts().values());
+        model.addAttribute("customer", customer);
         return "accountList";
+    }
+
+    @RequestMapping(path = "/accountDetails", method = RequestMethod.GET)
+    public String getAccountDetails(HttpSession session, Model model, String bankID, String customerEmailAddress, String accountID) {
+        setCommonAttributes(session, model);
+
+        Bank bank = Bank.retrieve(bankID);
+        Customer customer = bank.getBankCustomers().get(customerEmailAddress);
+        BankAccount bankAccount = customer.getBankAccountByID(accountID);
+        model.addAttribute("bankAccount", bankAccount);
+        return "accountDetails";
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)

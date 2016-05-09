@@ -5,18 +5,9 @@
 <h1>Hello, {{.}}!</h1>
 {{/name}}
 
-<h2>Please select an account ...</h2>
+<h2>Welcome to the account details page</h2>
 
-<ul>
-    {{#accountList}}
-    {{#.}}
-    <li>
-        <a href="/accountDetails?accountID={{accountID}}&bankID={{bank.bankID}}&customerEmailAddress={{customer.emailAddress}}">{{accountID}}</a>
-    </li>
-    {{/.}}
-    {{/accountList}}
-</ul>
-
+<h3>{{bankAccount.accountID}} has a balance of ${{bankAccount.accountBalance}}</h3>
 
 {{^name}}
 <h2>Enter your login information below please!</h2>
