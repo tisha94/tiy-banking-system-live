@@ -1,8 +1,84 @@
-body {
-  background-color: red;
+.welcomebanner {
+  border-bottom: 3px solid black;
 }
 
-.welcomebanner {
-    background-color: blue;
-    text-align: center;
+.navmenu ul {
+  list-style-type: none;
+  text-align: center;
+  padding: 5px;
+}
+
+.navoptions li {
+  display: inline;
+  border: 3px double black;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.navoptions li a {
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.welcomebanner h1 {
+  text-align: center;
+  color: red;
+}
+
+.contentBlock {
+  margin-left: 30%;
+  margin-right: 30%;
+  width: 500px;
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.contentBlock h2 {
+  color: darkred;
+  padding: 0;
+  margin: 0;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.banklist {
+  text-align: center;
+}
+
+.banklist ul {
+  display: inline-block;
+  list-style-type: none;
+  background-color: lightblue;
+  width: 200px;
+  max-height: 50%;
+  border: 3px double black;
+}
+
+.banklist li {
+  text-align: center;
+}
+
+.banklist li a {
+  text-decoration: none;
+  margin-right: 25%;
+  margin-left: 10%;
+}
+
+
+.loginview {
+  border: 3px double black;
+  background-color: lightgrey;
+  max-width: 50%;
+  height: 100px;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.loginview h2 {
+  text-align: center;
+}
+
+.loginview form {
+  text-align: center;
 }
