@@ -64,6 +64,24 @@ public class BankSystemController {
         return "redirect:/";
     }
 
+    @RequestMapping(path = "/create-account", method = RequestMethod.POST)
+    public String createAccount(HttpSession session, String bankID, String accountID,
+                                double initialDepositAmount, String customerEmailAddress) {
+        System.out.println("createAccount()");
+        Bank bank = Bank.retrieve(bankID);
+        System.out.println("Retrieved bank with ID = " + bankID);
+        System.out.println("ID on the retrieved bank object = " + bank.getBankID());
+
+        BankAccount bankAccount = new BankAccount(accountID, initialDepositAmount);
+        Customer customer = bank.getBankCustomers().get(customerEmailAddress);
+        bank.addBankAccountForCustomer(bankAccount, customer);
+
+        System.out.println("Added bank account for customer");
+        bank.save();
+
+        return "redirect:/accountList?bankID=" + bankID + "&customerEmailAddress=" + customerEmailAddress;
+    }
+
     // call this method at the beginning of every controller to make sure the
     // right items are set on the model ...
     public void setCommonAttributes(HttpSession session, Model model) {
