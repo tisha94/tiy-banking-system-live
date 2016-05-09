@@ -1,0 +1,29 @@
+<html>
+<body>
+
+{{#name}}
+<h1>Hello, {{.}}!</h1>
+{{/name}}
+
+<h2>Please select an account ...</h2>
+
+<ul>
+    {{#accountList}}
+    {{#.}}
+    <li>
+        <a href="/accountDetails">{{accountID}}</a>
+    </li>
+    {{/.}}
+    {{/accountList}}
+</ul>
+
+
+{{^name}}
+<h2>Enter your login information below please!</h2>
+<form action="/login" method="post">
+    <input type="text" placeholder="Enter your name" name="userName"/>
+    <button type="submit">Login</button>
+</form>
+{{/name}}
+</body>
+</html>

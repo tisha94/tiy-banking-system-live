@@ -4,6 +4,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -11,14 +15,43 @@ import static org.junit.Assert.*;
  */
 public class BankTest {
 
+    int originalBankID = Bank.getCurrentBankID();
+
     @Before
     public void setUp() throws Exception {
-
+        Bank.testPrefix = "TESTBANK";
     }
 
     @After
     public void tearDown() throws Exception {
+        ArrayList<Bank> allTestBanks = Bank.retrieveAllBanks();
+        System.out.println("Retrieved " + allTestBanks.size() + " banks");
+        for (Bank bank : allTestBanks) {
+            bank.deleteFile();
+        }
+        Bank.testPrefix = null;
+        Bank.setCurrentBankID(originalBankID);
+    }
 
+    @Test
+    public void testDeleteFile() throws Exception {
+        Bank testBank = new Bank();
+
+        testBank.save();
+        testBank.deleteFile();
+
+        String fileName = testBank.getBankID() + ".json";
+        try {
+            File deletedFile = new File(fileName);
+            boolean deleted = deletedFile.delete();
+            if (deleted) {
+                throw new Exception("Shouldn't have been able to delete a file that was already delete - Bank.deleteFile() isn't working properly");
+            } else {
+                System.out.println("Test bank file deleted successfully");
+            }
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
 
     @Test
@@ -86,6 +119,16 @@ public class BankTest {
         assertEquals(myBank.getBankName(), retrievedBank1.getBankName());
         assertEquals(mySecondBank.getBankID(), retrievedBank2.getBankID());
         assertEquals(mySecondBank.getBankName(), retrievedBank2.getBankName());
+
+        // also test that we can retrieve all banks here
+        ArrayList<Bank> allBanks = Bank.retrieveAllBanks();
+        assertNotNull(allBanks);
+        // I should have at least the two banks I've been testing with
+        // saved to file, so retrieveAllBanks should return at least 2 banks
+        int numBanks = allBanks.size();
+        // TODO find out how to compare less than or greater than
+        assertNotEquals(0, numBanks);
+        assertNotEquals(1, numBanks);
     }
 
     @Test

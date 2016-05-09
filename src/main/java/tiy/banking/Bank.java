@@ -6,6 +6,7 @@ import jodd.json.JsonSerializer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -13,10 +14,14 @@ import java.util.Scanner;
  * Created by localdom on 5/6/2016.
  */
 public class Bank {
-    private static int currentBankID = 100;
+    private static int currentBankID = 101;
 
     private String bankID;
     public final static String BANKID_PREFIX = "TIYBANK";
+    public static String testPrefix = null;
+    // used to switch back and forth between the "live" bank prefix and the "test"
+    // bank prefix
+    private static String activePrefix = BANKID_PREFIX;
     private String bankName;
     private String bankStreetAddress;
     private HashMap<String, Customer> bankCustomers = new HashMap<String, Customer>();
@@ -28,7 +33,13 @@ public class Bank {
     }
 
     public void initBank() {
-        this.bankID = BANKID_PREFIX + currentBankID;
+        if (testPrefix == null) {
+            activePrefix = BANKID_PREFIX;
+        } else {
+            activePrefix = testPrefix;
+        }
+        System.out.println("activePrefix = " + activePrefix);
+        this.bankID = activePrefix + currentBankID;
         currentBankID++;
         fileName = bankID + ".json";
     }
@@ -57,13 +68,54 @@ public class Bank {
             exception.printStackTrace();
             // TODO: add better exception handling here ...
         }
+    }
 
+    public void deleteFile() {
+//        System.out.println("deleteFile()");
+        try {
+            System.out.println("delete " + bankID + ".json");
+            File fileToDelete = new File(bankID + ".json");
+            System.out.println("Absolute: " + fileToDelete.getAbsolutePath());
+            boolean deleted = fileToDelete.delete();
+            if (deleted) {
+                System.out.println("\tsuccess");
+            } else {
+                System.out.println("\tunable to delete");
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            // TODO better exception handling here
+        }
+    }
+
+    public static ArrayList<Bank> retrieveAllBanks() {
+        ArrayList<Bank> bankList = new ArrayList<Bank>();
+
+        try {
+            File currentFolder = new File(".");
+            File[] allFiles = currentFolder.listFiles();
+            for (File currentFile : allFiles) {
+                if (currentFile.isFile()) {
+                    String fileName = currentFile.getName();
+                    if (fileName.endsWith(".json") && fileName.startsWith(activePrefix)) {
+                        String bankID = fileName.substring(0, fileName.lastIndexOf(".json"));
+                        Bank currentBank = retrieve(bankID);
+                        bankList.add(currentBank);
+                    }
+                }
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            // TODO need better exception handling here ...
+        }
+        return bankList;
     }
 
     public static Bank retrieve(String bankID) {
+        Scanner fileScanner = null;
         try {
             String fileToRetrieve = bankID + ".json";
-            Scanner fileScanner = new Scanner(new File(fileToRetrieve));
+            fileScanner = new Scanner(new File(fileToRetrieve));
             fileScanner.useDelimiter("\\Z"); // read the input until the "end of the input" delimiter
             String fileContents = fileScanner.next();
             JsonParser bankParser = new JsonParser();
@@ -74,6 +126,10 @@ public class Bank {
             ioException.printStackTrace();
             // TODO Implement better exception handling here
             return null;
+        } finally {
+            if (fileScanner != null) {
+                fileScanner.close();
+            }
         }
     }
 
@@ -125,7 +181,7 @@ public class Bank {
     }
 
     public static String getBankidPrefix() {
-        return BANKID_PREFIX;
+        return activePrefix;
     }
 
     public String getBankName() {
