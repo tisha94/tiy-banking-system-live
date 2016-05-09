@@ -12,7 +12,21 @@ body {
   border-bottom: 3px solid black;
 }
 
+.welcomebanner h1 {
+  display: inline-block;
+  text-align: center;
+  color: darkred;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.navmenu {
+  display: inline-block;
+  max-width: 40%;
+}
+
 .navmenu ul {
+  display: inline-block;
   list-style-type: none;
   text-align: center;
   margin-top: 5px;
@@ -33,13 +47,6 @@ body {
 .navoptions li a {
   font-size: 20px;
   text-decoration: none;
-}
-
-.welcomebanner h1 {
-  text-align: center;
-  color: darkred;
-  margin: 0;
-  margin-top: 10px;
 }
 
 .contentBlock {
@@ -86,15 +93,16 @@ body {
 
 
 .loginview {
+  margin-top: 5px;
+  margin-left: 15%;
+  display: inline-block;
   border: 3px double black;
   background-color: lightgrey;
-  max-width: 60%;
+  max-width: 200px;
   height: 100px;
-  margin-left: 20%;
-  margin-right: 20%;
 }
 
-.loginview h2 {
+.loginview p {
   text-align: center;
 }
 
