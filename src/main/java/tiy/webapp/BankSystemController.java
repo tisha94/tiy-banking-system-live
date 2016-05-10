@@ -82,6 +82,16 @@ public class BankSystemController {
         return "redirect:/accountList?bankID=" + bankID + "&customerEmailAddress=" + customerEmailAddress;
     }
 
+    @RequestMapping(path = "/create-bank", method = RequestMethod.POST)
+    public String createBank(HttpSession session, String bankName, String bankAddress) {
+        System.out.println("createBank()");
+
+        Bank newBank = new Bank(bankName, bankAddress);
+        newBank.save();
+
+        return "redirect:/";
+    }
+
     // call this method at the beginning of every controller to make sure the
     // right items are set on the model ...
     public void setCommonAttributes(HttpSession session, Model model) {
