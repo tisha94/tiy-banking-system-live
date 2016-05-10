@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 public class BankSystemController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String getPerson(HttpSession session, Model model) {
+    public String getHome(HttpSession session, Model model) {
         setCommonAttributes(session, model);
         model.addAttribute("bankList", Bank.retrieveAllBanks());
 
