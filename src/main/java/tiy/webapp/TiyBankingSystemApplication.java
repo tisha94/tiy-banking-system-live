@@ -11,3 +11,4 @@ public class TiyBankingSystemApplication {
 		SpringApplication.run(TiyBankingSystemApplication.class, args);
 	}
 }
+

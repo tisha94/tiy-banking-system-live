@@ -6,6 +6,7 @@ import java.util.HashMap;
  * Created by localdom on 5/6/2016.
  */
 public class Customer extends Person {
+
     private HashMap<String, BankAccount> bankAccounts = new HashMap<String, BankAccount>();
 
     public Customer() {

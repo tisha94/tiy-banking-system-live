@@ -92,7 +92,7 @@ public class Bank {
         ArrayList<Bank> bankList = new ArrayList<Bank>();
 
         try {
-            File currentFolder = new File(".");
+            File currentFolder = new File("."); // get me a file object to represent in the current folder
             File[] allFiles = currentFolder.listFiles();
             for (File currentFile : allFiles) {
                 if (currentFile.isFile()) {
