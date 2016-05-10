@@ -30,19 +30,27 @@
     </div>
 
     <div class="contentBlock">
-<h2>Please select a Bank ...</h2>
-    <div class="banklist">
-<ul>
-    {{#bankList}}
-    {{#.}}
-    <li>
-        <a href="/customerList?bankID={{bankID}}">{{bankName}}</a>
-    </li>
-    {{/.}}
-    {{/bankList}}
-</ul>
-</div>
-</div>
+        <h2>Please select a Bank ...</h2>
+            <div class="banklist">
+                <ul>
+                    {{#bankList}}
+                    {{#.}}
+                    <li>
+                        <a href="/customerList?bankID={{bankID}}">{{bankName}}</a>
+                    </li>
+                    {{/.}}
+                    {{/bankList}}
+                </ul>
+            </div>
+    </div>
+
+    <form action="/create-bank" method="post">
+        <input type="text" placeholder="Enter Bank Name" name="bankName"/>
+        <input type="text" placeholder="Enter Bank Address" name="bankAddress"/>
+
+        <button type="submit">Create Bank</button>
+    </form>
+
 
 </body>
 </html>
